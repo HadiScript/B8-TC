@@ -1,20 +1,33 @@
 import { Col, Row, Button, Checkbox, Form, Input } from "antd"
+import { useTheme } from "../../../context/theme.context";
+import MyErrors from "../../../helpers/errors/MyErrors";
+
+import { _useAuth } from "../../../actions/_useAuth";
+import { useAuth } from "../../../context/auth.context";
+import { redirect, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const Login = () => {
 
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+  const { theme } = useTheme()
+  const router = useNavigate()
+
+  const { handleSubmit, loading, err } = _useAuth()
+  const [auth] = useAuth()
+
+
+  useEffect(() => {
+    if (auth?.token) {
+      router('/')
+    }
+  }, [router])
+
 
   return (
     <Row style={{ minHeight: "100vh", }}>
-
-      <Col md={18} xs={0} style={{ backgroundColor: "#164e63" }} className="text-light ">
+      <Col md={18} xs={0} style={{ backgroundColor: theme?.primary }} className="text-light ">
         <div className="p-4" >
           <h1>Ticketing System</h1>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.orem Ipsum passages, and more recently with desktop publishing </p>
@@ -28,23 +41,22 @@ const Login = () => {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleSubmit}
           layout="vertical"
         >
 
 
           <Form.Item
-            label="Username"
-            name="username"
+            label="Email"
+            name="email"
             rules={[
               {
                 required: true,
-                message: 'Please input your username!',
+                message: 'please enter valid email!',
               },
             ]}
           >
-            <Input />
+            <Input type="email" />
           </Form.Item>
 
           <Form.Item
@@ -68,16 +80,18 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button loading={loading} type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
+
+
+          {err && <MyErrors error={err} />}
         </Form>
 
 
 
       </Col>
-
     </Row >
   )
 }

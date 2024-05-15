@@ -3,6 +3,7 @@ import AppRouting from "./AppRouting"
 import { useState } from "react";
 import ThemeDrawer from "./component/common/theme.drawer";
 import { useTheme } from "../context/theme.context";
+import { useAuth } from "../context/auth.context";
 
 
 const data = {
@@ -16,30 +17,25 @@ const data = {
 
 const App = () => {
 
-  const [toggle, setToggle] = useState(false)
-
-  const { currentTheme, theme } = useTheme();
-
-
-
-
+  const [toggle, setToggle] = useState(false);
+  const { theme } = useTheme()
+  const [auth] = useAuth()
 
   return (
     <ConfigProvider
 
       theme={{
         token: {
-          colorPrimary: theme.colorPrimary,
-          borderRadius: theme.borderRadius,
+          colorPrimary: theme.primary,
+
         },
         components: {
           Button: {
-            colorPrimary: theme.Button?.colorPrimary,
-            algorithm: theme.Button?.algorithm,
+            colorPrimary: theme?.primary,
+            colorFillSecondary: theme?.secondary
           },
         },
       }}>
-      {currentTheme}
       <AppRouting />
       <FloatButton onClick={() => setToggle(!toggle)} />
 

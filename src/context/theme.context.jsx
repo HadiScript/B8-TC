@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { blue, cyan, grey, teal } from "../helpers/constants/theme.data";
+import { useContext, useState, createContext } from "react";
+import { themesData } from "../helpers/constants/theme.data";
 
 
 const themeContext = createContext();
@@ -7,36 +7,24 @@ const themeContext = createContext();
 export const useTheme = () => useContext(themeContext);
 
 
-const ThemeProvider = ({ children }) => {
+export const ThemeProvider = ({ children }) => {
+  const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme-ticket') || "cyan")
 
-
-  const [theme, setTheme] = useState({
-    borderRadius: 6,
-    colorPrimary: '#083344',
-    Button: {
-      colorPrimary: '#164e63',
-    },
-  })
-
-  const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme-ticket') ? localStorage.getItem('theme-ticket') : "cyan")
-
-  const handleChange = color => {
+  const themeChanger = (color) => {
+    console.log(color, "from theme changer")
+    localStorage.setItem('theme-ticket', color);
     setCurrentTheme(color);
-    localStorage.setItem('theme-ticket', color)
-    setTheme({
-      ...theme,
-      colorPrimary: currentTheme === 'cyan' ? cyan.primary : currentTheme === 'blue' ? blue.primary : currentTheme === 'grey' ? grey.primary : currentTheme === 'teal' ? teal.primary : "",
-      Button: {
-        colorPrimary: currentTheme === 'cyan' ? cyan.secondary : currentTheme === 'blue' ? blue.secondary : currentTheme === 'grey' ? grey.secondary : currentTheme === 'teal' ? teal.secondary : ""
-      }
-    })
   }
 
 
+  let myobj = {
+    themeChanger,
+    theme: themesData[currentTheme]
+  }
 
-  return <themeContext.Provider value={{ currentTheme, handleChange, theme }}>
+  return <themeContext.Provider value={myobj} >
     {children}
-  </themeContext.Provider>
+  </themeContext.Provider >
 }
 
 

@@ -1,0 +1,54 @@
+.fixedColumn {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.leftColumn {
+  left: 0;
+  width: 20%;
+}
+
+.centerColumn {
+  padding: 10px;
+  margin-left: 16.6%;
+}
+
+@media screen and (max-width: 768px) {
+  .leftColumn,
+  .rightColumn {
+    display: none;
+  }
+  .centerColumn {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.ant-menu-item-selected {
+  color: #000000e0 !important;
+  background-color: transparent !important;
+  border-radius: 0px !important;
+}
+
+.ant-drawer-body {
+  padding: 0px !important;
+}
+
+/* scrollbar */
+.customScrollbar {
+  max-height: 50vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #0d1282;
+}
+
+.customScrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb {
+  background-color: #0d1282;
+  border-radius: 10px;
+}
