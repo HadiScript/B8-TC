@@ -1,5 +1,8 @@
 import { Col, Row } from "antd"
 import Sidebar from "./Sidebar"
+import PanelHeader from "./PanelHeader"
+
+import '../../../assets/layout.css'
 
 const Layout = ({ children }) => {
 
@@ -13,13 +16,9 @@ const Layout = ({ children }) => {
         </Col>
 
         <Col lg={20} xs={24} className="centerColumn" >
-          <div> headers </div>
-          <div>{children}</div>
-
+          <PanelHeader />
+          <div className="py-2 px-4">{children}</div>
         </Col>
-
-
-
       </Row>
     </>
   )

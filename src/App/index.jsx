@@ -34,8 +34,14 @@ const App = () => {
             colorPrimary: theme?.primary,
             colorFillSecondary: theme?.secondary
           },
+          Menu: {
+            subMenuItemBorderRadius: 100
+          }
+
         },
       }}>
+      {/* <div style={{backgroundColor : theme.primary}}>
+      </div> */}
       <AppRouting />
       <FloatButton onClick={() => setToggle(!toggle)} />
 

@@ -3,10 +3,9 @@ import Layout from "../../component/panel/Layout"
 import axios from "axios"
 import { authAPI } from "../../../helpers/API"
 import { useAuth } from "../../../context/auth.context"
-import { useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 
 const AgentRouting = () => {
-
   const router = useNavigate()
   const [auth] = useAuth()
 
@@ -27,7 +26,11 @@ const AgentRouting = () => {
 
 
   return (
-    <Layout>AgentRouting</Layout>
+    <Layout>
+
+      <Outlet />
+
+    </Layout>
   )
 }
 

@@ -56,12 +56,13 @@ const Login = () => {
               },
             ]}
           >
-            <Input type="email" />
+            <Input type="email" defaultValue={'clientA@gmail.com'} />
           </Form.Item>
 
           <Form.Item
             label="Password"
             name="password"
+
             rules={[
               {
                 required: true,
@@ -69,7 +70,7 @@ const Login = () => {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password defaultValue="hadi.." />
           </Form.Item>
 
           <Form.Item
